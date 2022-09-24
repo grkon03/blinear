@@ -65,13 +65,17 @@ namespace blinear
 
     public:
         Line(Square s, Direction x, Direction y, Direction z) : start(s), xdir(x), ydir(y), zdir(z){};
+        Line(int n) { SetLineByLineNumber(n); }
 
-        Square operator[](int);
+        Square
+        operator[](int);
         BLError SetLineByLineNumber(int);
         int GetLineNumber();
     };
 
     constexpr int MAX_LINES = 76;
+
+    extern const Line DEFAULT_LINES[MAX_LINES];
 
     /*
     The game board of 3 dimensional 4 in a row.
