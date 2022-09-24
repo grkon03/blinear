@@ -71,7 +71,7 @@ namespace blinear
         int GetLineNumber();
     };
 
-    constexpr int MAX_LINE = 76;
+    constexpr int MAX_LINES = 76;
 
     /*
     The game board of 3 dimensional 4 in a row.
