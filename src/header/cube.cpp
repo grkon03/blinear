@@ -60,6 +60,13 @@ namespace blinear
         return Square{start.x + xdir * n, start.y + ydir * n, start.z + zdir * n};
     }
 
+    Square Line::operator[](int n) const
+    {
+        if (n < 0 && 3 < n)
+            return SQUAREERR;
+        return Square{start.x + xdir * n, start.y + ydir * n, start.z + zdir * n};
+    }
+
     BLError Line::SetLineByLineNumber(int num)
     {
         int num_s;
@@ -237,5 +244,24 @@ namespace blinear
             }
         }
         return blet::GenMoveError("this vertical row is full of balls");
+    }
+
+    Ball Cube::JudgeWinner()
+    {
+        int i;
+        for (i = 0; i < MAX_LINES; i++)
+        {
+            if (GetSquare(DEFAULT_LINES[i][3]) == NOBALL)
+                continue;
+            if (
+                GetSquare(DEFAULT_LINES[i][0]) == GetSquare(DEFAULT_LINES[i][1]) &&
+                GetSquare(DEFAULT_LINES[i][1]) == GetSquare(DEFAULT_LINES[i][2]) &&
+                GetSquare(DEFAULT_LINES[i][2]) == GetSquare(DEFAULT_LINES[i][3]))
+            {
+                return GetSquare(DEFAULT_LINES[i][0]);
+            }
+        }
+
+        return NOBALL;
     }
 }

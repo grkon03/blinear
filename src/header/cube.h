@@ -67,8 +67,8 @@ namespace blinear
         Line(Square s, Direction x, Direction y, Direction z) : start(s), xdir(x), ydir(y), zdir(z){};
         Line(int n) { SetLineByLineNumber(n); }
 
-        Square
-        operator[](int);
+        Square operator[](int);
+        Square operator[](int) const;
         BLError SetLineByLineNumber(int);
         int GetLineNumber();
     };
