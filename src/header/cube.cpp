@@ -57,4 +57,21 @@ namespace blinear
         squares[SquareToIndex(square)] = b;
         return blet::NoErr;
     }
+
+    BLError Cube::Move(Position pos)
+    {
+        if (IsError(pos))
+            return blet::GenMoveError("this position is POSITIONERR");
+
+        for (Coordinate c = COOR1; c <= COOR4; c++)
+        {
+            if (GetSquare(Square{pos.x, pos.y, c}) == NOBALL)
+            {
+                SetSquare(Square{pos.x, pos.y, c}, turn);
+                turn++;
+                return blet::NoErr;
+            }
+        }
+        return blet::GenMoveError("this vertical row is full of balls");
+    }
 }

@@ -18,8 +18,10 @@ namespace blinear
     namespace blet
     {
         BLError GenSetSquareError(std::string);
+        BLError GenMoveError(std::string);
 
         const BLError NoErr = BLError();
         const BLError SetSquareErr = GenSetSquareError("");
+        const BLError MoveErr = GenMoveError("");
     }
 }

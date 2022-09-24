@@ -8,5 +8,10 @@ namespace blinear
         {
             return BLError(100, mes);
         }
+
+        BLError GenMoveError(std::string mes)
+        {
+            return BLError(200, mes);
+        }
     }
 }

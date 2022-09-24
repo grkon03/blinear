@@ -65,5 +65,6 @@ namespace blinear
 
         Ball GetSquare(Square);
         BLError SetSquare(Square, Ball);
+        BLError Move(Position);
     };
 }
