@@ -15,6 +15,17 @@ namespace blinear
         return false;
     }
 
+    bool IsError(Position pos)
+    {
+        if (
+            pos.x == COORERR ||
+            pos.y == COORERR)
+        {
+            return true;
+        }
+        return false;
+    }
+
     Square IndexToSquare(int index)
     {
         if (index < 0 || 63 < index)

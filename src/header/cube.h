@@ -32,7 +32,16 @@ namespace blinear
 
     const Square SQUAREERR = Square{COORERR, COORERR, COORERR};
 
+    struct Position
+    {
+        Coordinate x;
+        Coordinate y;
+    };
+
+    const Position POSITIONERR = Position{COORERR, COORERR};
+
     bool IsError(Square);
+    bool IsError(Position);
     Square IndexToSquare(int);
     int SquareToIndex(Square);
 
