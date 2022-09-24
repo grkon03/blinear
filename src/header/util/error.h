@@ -13,6 +13,9 @@ namespace blinear
     public:
         BLError() : status(0), message(0){};
         BLError(int status, std::string message) : status(status), message(message){};
+
+        bool operator==(const BLError &b);
+        bool operator!=(const BLError &b);
     };
 
     namespace blet
