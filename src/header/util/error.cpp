@@ -16,5 +16,10 @@ namespace blinear
         {
             return BLError(200, mes);
         }
+
+        BLError GenSetLineError(std::string mes)
+        {
+            return BLError(300, mes);
+        }
     }
 }

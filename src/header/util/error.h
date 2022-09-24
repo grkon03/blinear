@@ -22,9 +22,11 @@ namespace blinear
     {
         BLError GenSetSquareError(std::string);
         BLError GenMoveError(std::string);
+        BLError GenSetLineError(std::string);
 
         const BLError NoErr = BLError();
         const BLError SetSquareErr = GenSetSquareError("");
         const BLError MoveErr = GenMoveError("");
+        const BLError SetLineErr = GenSetLineError("");
     }
 }

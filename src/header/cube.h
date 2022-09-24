@@ -45,6 +45,34 @@ namespace blinear
     Square IndexToSquare(int);
     int SquareToIndex(Square);
 
+    enum Direction : int
+    {
+        MINUSDIR = -1,
+        NOTMOVE,
+        PLUSDIR = 1,
+    };
+
+    /*
+    Class of line of the board
+    */
+    class Line
+    {
+    private:
+        Square start;
+        Direction xdir;
+        Direction ydir;
+        Direction zdir;
+
+    public:
+        Line(Square s, Direction x, Direction y, Direction z) : start(s), xdir(x), ydir(y), zdir(z){};
+
+        Square operator[](int);
+        BLError SetLineByLineNumber(int);
+        int GetLineNumber();
+    };
+
+    constexpr int MAX_LINE = 76;
+
     /*
     The game board of 3 dimensional 4 in a row.
     */
@@ -66,5 +94,6 @@ namespace blinear
         Ball GetSquare(Square);
         BLError SetSquare(Square, Ball);
         BLError Move(Position);
+        Ball JudgeWinner();
     };
 }
