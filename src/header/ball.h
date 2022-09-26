@@ -15,8 +15,8 @@ namespace blinear
         BLACK,
     };
 
-    inline Ball operator++(Ball b, int)
+    inline Ball operator++(Ball &b, int)
     {
-        return (b == NOBALL) ? NOBALL : Ball(3 - (int)b);
+        return (b = (b == NOBALL) ? NOBALL : Ball(3 - (int)b));
     }
 }

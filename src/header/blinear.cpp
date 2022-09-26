@@ -120,6 +120,26 @@ namespace blinear
         return blet::NoErr;
     }
 
+    Position Blinear::GetBestMove(int index)
+    {
+        return bestMoves[index];
+    }
+
+    double Blinear::GetParam(Ball color, int index)
+    {
+        switch (color)
+        {
+        case WHITE:
+            return whiteParams[index];
+        case BLACK:
+            return blackParams[index];
+        case NOBALL:
+            return -1;
+        }
+
+        return -1;
+    }
+
     double Blinear::evaluateTemporary(Cube cube)
     {
         double evl = 0;
@@ -228,9 +248,9 @@ namespace blinear
                     case BLACK:
                         if (alpha >= ret)
                             return ret;
-                        else if (alpha > ret)
+                        else if (beta > ret)
                         {
-                            alpha = ret;
+                            beta = ret;
                             bestMoves[depth] = Position{x, y};
                         }
                         break;

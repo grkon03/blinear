@@ -53,12 +53,19 @@ namespace blinear
             LoadParams(WHITE, DEFAULT_WHITEPARAM_FILE);
             LoadParams(BLACK, DEFAULT_BLACKPARAM_FILE);
         };
-        Blinear() { Blinear(false); }
+        Blinear() : analyzed(Cube()), evaluation(0), bestMovesLength(0)
+        {
+            LoadParams(WHITE, DEFAULT_WHITEPARAM_FILE);
+            LoadParams(BLACK, DEFAULT_BLACKPARAM_FILE);
+        }
 
         BLError LoadParams(Ball, std::string);
         BLError SaveParams(Ball, std::string);
         BLError NewParamFile(std::string);
         BLError NewParamFile(std::string, double[MAX_LINES]);
+        double GetParam(Ball, int);
+
+        Position GetBestMove(int);
 
         double evaluateTemporary(Cube);
         double alphabeta(Cube, double, double, int, int);
