@@ -240,6 +240,7 @@ namespace blinear
             {
                 SetSquare(Square{pos.x, pos.y, c}, turn);
                 turn++;
+                spendTurn++;
                 return blet::NoErr;
             }
         }

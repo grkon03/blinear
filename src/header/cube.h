@@ -85,9 +85,10 @@ namespace blinear
     private:
         Ball squares[64];
         Ball turn;
+        int spendTurn;
 
     public:
-        Cube() : turn(WHITE)
+        Cube() : turn(WHITE), spendTurn(0)
         {
             for (int i = 0; i < 64; i++)
             {

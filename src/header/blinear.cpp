@@ -119,4 +119,50 @@ namespace blinear
 
         return blet::NoErr;
     }
+
+    double Blinear::evaluateTemporary(Cube cube)
+    {
+        double evl = 0;
+        Ball c = NOBALL, ctmp;
+        int i, j, count;
+        bool skip;
+
+        for (i = 0; i < MAX_LINES; i++)
+        {
+            c = NOBALL;
+            count = 0;
+            skip = false;
+            for (j = 0; j < 4; j++)
+            {
+                if (c == NOBALL)
+                {
+                    c = cube.GetSquare(DEFAULT_LINES[i][j]);
+                }
+                else
+                {
+                    ctmp = cube.GetSquare(DEFAULT_LINES[i][j]);
+                    if (ctmp != NOBALL)
+                    {
+                        if (c == ctmp)
+                            count++;
+                        else
+                        {
+                            skip = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (skip)
+                continue;
+
+            if (c == WHITE)
+                evl += (whiteParams[i] * count) / 4;
+            else if (c == BLACK)
+                evl -= (blackParams[i] * count) / 4;
+        }
+
+        return evl;
+    }
 }

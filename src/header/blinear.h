@@ -59,5 +59,7 @@ namespace blinear
         BLError SaveParams(Ball, std::string);
         BLError NewParamFile(std::string);
         BLError NewParamFile(std::string, double[MAX_LINES]);
+
+        double evaluateTemporary(Cube);
     };
 }
