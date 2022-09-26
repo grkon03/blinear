@@ -38,11 +38,23 @@ namespace blinear
         double blackParams[MAX_LINES];
 
     public:
-        Blinear() : analyzed(Cube()), evaluation(0), bestMovesLength(0)
+        Blinear(bool paramReset) : analyzed(Cube()), evaluation(0), bestMovesLength(0)
         {
+            if (paramReset)
+            {
+                for (int i = 0; i < MAX_LINES; i++)
+                {
+                    whiteParams[i] = ONELINE_WORTH;
+                    blackParams[i] = ONELINE_WORTH;
+                }
+                SaveParams(WHITE, DEFAULT_WHITEPARAM_FILE);
+                SaveParams(BLACK, DEFAULT_BLACKPARAM_FILE);
+            }
             LoadParams(WHITE, DEFAULT_WHITEPARAM_FILE);
-            LoadParams(BLACK, DEFAULT_WHITEPARAM_FILE);
+            LoadParams(BLACK, DEFAULT_BLACKPARAM_FILE);
         };
+        Blinear() { Blinear(false); }
+
         BLError LoadParams(Ball, std::string);
         BLError SaveParams(Ball, std::string);
         BLError NewParamFile(std::string);

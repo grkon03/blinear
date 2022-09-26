@@ -11,7 +11,7 @@ namespace blinear
         std::string message;
 
     public:
-        BLError() : status(0), message(0){};
+        BLError() : status(0), message(""){};
         BLError(int status, std::string message) : status(status), message(message){};
 
         bool operator==(const BLError &b);
