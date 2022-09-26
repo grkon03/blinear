@@ -265,4 +265,8 @@ namespace blinear
 
         return NOBALL;
     }
+
+    Ball Cube::GetTurn() { return turn; }
+
+    int Cube::GetSpendTurn() { return spendTurn; }
 }

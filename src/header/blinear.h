@@ -61,5 +61,7 @@ namespace blinear
         BLError NewParamFile(std::string, double[MAX_LINES]);
 
         double evaluateTemporary(Cube);
+        double alphabeta(Cube, double, double, int, int);
+        double evaluate(Cube);
     };
 }

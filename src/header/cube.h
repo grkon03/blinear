@@ -100,5 +100,7 @@ namespace blinear
         BLError SetSquare(Square, Ball);
         BLError Move(Position);
         Ball JudgeWinner();
+        Ball GetTurn();
+        int GetSpendTurn();
     };
 }

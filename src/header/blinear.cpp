@@ -157,6 +157,14 @@ namespace blinear
             if (skip)
                 continue;
 
+            if (count == 4)
+            {
+                if (c == WHITE)
+                    return 10000;
+                else
+                    return -10000;
+            }
+
             if (c == WHITE)
                 evl += (whiteParams[i] * count) / 4;
             else if (c == BLACK)
@@ -164,5 +172,93 @@ namespace blinear
         }
 
         return evl;
+    }
+
+    double Blinear::alphabeta(Cube cube, double alpha, double beta, int depth, int depthMax)
+    {
+        switch (cube.JudgeWinner())
+        {
+        case WHITE:
+            return 10000;
+        case BLACK:
+            return -10000;
+        default:
+            break;
+        }
+
+        if (cube.GetSpendTurn() == 64)
+        {
+            bestMovesLength = depth;
+            return 0;
+        }
+
+        Cube copy;
+        double ret;
+        BLError err;
+
+        if (depth == depthMax)
+        {
+            return evaluateTemporary(cube);
+        }
+        else
+        {
+            for (Coordinate x = COOR1; x <= COOR4; x++)
+            {
+                for (Coordinate y = COOR1; y <= COOR4; y++)
+                {
+                    copy = cube;
+                    err = copy.Move(Position{x, y});
+
+                    if (err != blet::NoErr)
+                        continue;
+
+                    ret = alphabeta(copy, alpha, beta, depth + 1, depthMax);
+
+                    switch (cube.GetTurn())
+                    {
+                    case WHITE:
+                        if (beta <= ret)
+                            return ret;
+                        else if (alpha < ret)
+                        {
+                            alpha = ret;
+                            bestMoves[depth] = Position{x, y};
+                        }
+                        break;
+                    case BLACK:
+                        if (alpha >= ret)
+                            return ret;
+                        else if (alpha > ret)
+                        {
+                            alpha = ret;
+                            bestMoves[depth] = Position{x, y};
+                        }
+                        break;
+                    default:
+                        break;
+                    }
+                }
+            }
+        }
+
+        switch (cube.GetTurn())
+        {
+        case WHITE:
+            return alpha;
+        case BLACK:
+            return beta;
+        default:
+            break;
+        }
+
+        return 0;
+    }
+
+    double Blinear::evaluate(Cube cube)
+    {
+        analyzed = cube;
+        bestMovesLength = 6;
+        evaluation = alphabeta(cube, -100000, 100000, 0, 6);
+        return evaluation;
     }
 }
