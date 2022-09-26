@@ -2,5 +2,4 @@
 
 int main()
 {
-    blinear::Blinear bl(true);
 }
