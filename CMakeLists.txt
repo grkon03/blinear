@@ -12,6 +12,7 @@ set(TARGET_source_file
 ./src/main.cpp
 ./src/header/cube.cpp
 ./src/header/ball.cpp
+./src/header/blinear.cpp
 ./src/header/util/error.cpp
 ./src/header/util/util.cpp
 )

@@ -23,10 +23,16 @@ namespace blinear
         BLError GenSetSquareError(std::string);
         BLError GenMoveError(std::string);
         BLError GenSetLineError(std::string);
+        BLError GenLoadParamError(std::string);
+        BLError GenSaveParamError(std::string);
+        BLError GenNewParamFileError(std::string);
 
         const BLError NoErr = BLError();
         const BLError SetSquareErr = GenSetSquareError("");
         const BLError MoveErr = GenMoveError("");
         const BLError SetLineErr = GenSetLineError("");
+        const BLError LoadParamErr = GenLoadParamError("");
+        const BLError SaveParamErr = GenSaveParamError("");
+        const BLError NewParamFileErr = GenNewParamFileError("");
     }
 }

@@ -21,5 +21,20 @@ namespace blinear
         {
             return BLError(300, mes);
         }
+
+        BLError GenLoadParamError(std::string mes)
+        {
+            return BLError(400, mes);
+        }
+
+        BLError GenSaveParamError(std::string mes)
+        {
+            return BLError(500, mes);
+        }
+
+        BLError GenNewParamFileError(std::string mes)
+        {
+            return BLError(600, mes);
+        }
     }
 }
