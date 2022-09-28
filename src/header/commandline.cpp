@@ -7,16 +7,33 @@ namespace blinear
     BLError CommandLine::DisplayCube(Cube *cube)
     {
         Ball b;
-        std::string b_str;
+        std::string b_str, step_str;
         std::cout << std::endl;
         if (setting.displaySpendTurn)
         {
-            std::cout << (cube->GetSpendTurn() + 1) << "ターン目" << std::endl
+            std::cout << "turn " << (cube->GetSpendTurn() + 1) << std::endl
                       << std::endl;
         }
         for (Coordinate z = COOR4; z >= COOR1; z--)
         {
-            std::cout << ((int)z + 1) << "段目" << std::endl;
+            switch (z)
+            {
+            case COOR1:
+                step_str = "1st";
+                break;
+            case COOR2:
+                step_str = "2nd";
+                break;
+            case COOR3:
+                step_str = "3rd";
+                break;
+            case COOR4:
+                step_str = "4th";
+                break;
+            default:
+                break;
+            }
+            std::cout << step_str << " step" << std::endl;
             for (Coordinate y = COOR4; y >= COOR1; y--)
             {
                 std::cout << " | ";
@@ -39,7 +56,7 @@ namespace blinear
                 std::cout << std::endl;
             }
         }
-        std::cout << ((cube->GetTurn() == WHITE) ? "白" : "黒") << "のターンです" << std::endl;
+        std::cout << ((cube->GetTurn() == WHITE) ? "White" : "Black") << " turn" << std::endl;
         std::cout << std::endl;
 
         return blet::NoErr;
