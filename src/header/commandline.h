@@ -17,11 +17,11 @@ namespace blinear
     {
     private:
         BLCSetting setting;
-        Blinear computer;
+        Blinear *computer;
 
     public:
-        CommandLine(BLCSetting setting) : setting(setting), computer(Blinear()){};
-        CommandLine(BLCSetting setting, Blinear bl) : setting(setting), computer(bl){};
+        CommandLine(BLCSetting setting) : setting(setting), computer(new Blinear()){};
+        CommandLine(BLCSetting setting, Blinear *bl) : setting(setting), computer(bl){};
 
         BLError DisplayCube(Cube *);
         BLError PlayGameParser(Cube *, std::string, std::string *);

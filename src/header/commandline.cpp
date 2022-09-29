@@ -197,7 +197,7 @@ namespace blinear
         {
             for (j = 0; j < number; j++)
             {
-                if (IsError(bestmove = computer.GetBestMove(j)))
+                if (IsError(bestmove = computer->GetBestMove(j)))
                 {
                     *result = "Note : not analyzed after this move";
                 }
