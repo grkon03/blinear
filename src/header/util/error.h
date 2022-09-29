@@ -26,6 +26,7 @@ namespace blinear
         BLError GenLoadParamError(std::string);
         BLError GenSaveParamError(std::string);
         BLError GenNewParamFileError(std::string);
+        BLError GenCommandParseError(std::string);
 
         const BLError NoErr = BLError();
         const BLError SetSquareErr = GenSetSquareError("");
@@ -34,5 +35,6 @@ namespace blinear
         const BLError LoadParamErr = GenLoadParamError("");
         const BLError SaveParamErr = GenSaveParamError("");
         const BLError NewParamFileErr = GenNewParamFileError("");
+        const BLError CommandParseErr = GenCommandParseError("");
     }
 }

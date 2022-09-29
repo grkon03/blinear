@@ -53,6 +53,22 @@ namespace blinear
         return (square.x * 16 + square.y * 4 + square.z);
     }
 
+    std::string PositionToString(Position pos)
+    {
+        if (IsError(pos))
+            return "ER";
+        return std::to_string(((int)pos.x + 1) * 10 + (int)pos.y + 1);
+    }
+
+    Position StringToPosition(std::string str)
+    {
+        if (str.length() != 2)
+            return POSITIONERR;
+        if (str[0] < '0' || '3' < str[0] || str[1] < '0' || '3' < str[1])
+            return POSITIONERR;
+        return Position{Coordinate(str[0] - '0'), Coordinate(str[1] - '0')};
+    }
+
     Square Line::operator[](int n)
     {
         if (n < 0 && 3 < n)
@@ -239,12 +255,34 @@ namespace blinear
             if (GetSquare(Square{pos.x, pos.y, c}) == NOBALL)
             {
                 SetSquare(Square{pos.x, pos.y, c}, turn);
+                record[spendTurn] = pos;
                 turn++;
                 spendTurn++;
                 return blet::NoErr;
             }
         }
         return blet::GenMoveError("this vertical row is full of balls");
+    }
+
+    BLError Cube::MoveBack()
+    {
+        if (spendTurn == 0)
+            return blet::GenMoveError("there is no ball");
+
+        spendTurn--;
+
+        for (Coordinate c = COOR4; c >= COOR1; c--)
+        {
+            if (GetSquare(Square{record[spendTurn].x, record[spendTurn].y, c}) != NOBALL)
+            {
+                SetSquare(Square{record[spendTurn].x, record[spendTurn].y, c}, NOBALL);
+                record[spendTurn] = POSITIONERR;
+                turn++;
+                return blet::NoErr;
+            }
+        }
+
+        return blet::NoErr;
     }
 
     Ball Cube::JudgeWinner()
@@ -269,4 +307,12 @@ namespace blinear
     Ball Cube::GetTurn() { return turn; }
 
     int Cube::GetSpendTurn() { return spendTurn; }
+
+    void Cube::GetRecord(Position rec[64])
+    {
+        for (int i = 0; i < 64; i++)
+        {
+            rec[i] = record[i];
+        }
+    }
 }

@@ -36,5 +36,10 @@ namespace blinear
         {
             return BLError(600, mes);
         }
+
+        BLError GenCommandParseError(std::string mes)
+        {
+            return BLError(700, mes);
+        }
     }
 }

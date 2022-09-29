@@ -278,6 +278,10 @@ namespace blinear
     {
         analyzed = cube;
         bestMovesLength = 6;
+        for (int i = 0; i < 64; i++)
+        {
+            bestMoves[i] = POSITIONERR;
+        }
         evaluation = alphabeta(cube, -100000, 100000, 0, 6);
         return evaluation;
     }

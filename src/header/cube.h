@@ -44,6 +44,8 @@ namespace blinear
     bool IsError(Position);
     Square IndexToSquare(int);
     int SquareToIndex(Square);
+    std::string PositionToString(Position);
+    Position StringToPosition(std::string);
 
     enum Direction : int
     {
@@ -85,6 +87,7 @@ namespace blinear
     private:
         Ball squares[64];
         Ball turn;
+        Position record[64];
         int spendTurn;
 
     public:
@@ -93,14 +96,17 @@ namespace blinear
             for (int i = 0; i < 64; i++)
             {
                 squares[i] = NOBALL;
+                record[i] = POSITIONERR;
             }
         };
 
         Ball GetSquare(Square);
         BLError SetSquare(Square, Ball);
         BLError Move(Position);
+        BLError MoveBack();
         Ball JudgeWinner();
         Ball GetTurn();
         int GetSpendTurn();
+        void GetRecord(Position[64]);
     };
 }
