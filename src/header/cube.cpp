@@ -149,8 +149,8 @@ namespace blinear
         else if (num < 76)
         {
             num_s = (num - 72);
-            start = Square{COOR1 + ((num_s / 2) % 2) * 3, COOR1 + ((num_s % 2) * 3), COOR1};
-            xdir = Direction(PLUSDIR - ((num_s / 2) % 2) * 2);
+            start = Square{COOR1 + (int(num_s / 2) * 3), COOR1 + ((num_s % 2) * 3), COOR1};
+            xdir = Direction(PLUSDIR - (int(num_s / 2) * 2));
             ydir = Direction(PLUSDIR - (num_s % 2) * 2);
             zdir = PLUSDIR;
         }
@@ -181,7 +181,7 @@ namespace blinear
                 }
                 else
                 {
-                    return ((int)start.x + 48 + (1 - (int)zdir) / 2);
+                    return ((int)start.x * 2 + 48 + (1 - (int)zdir) / 2);
                 }
             }
         }
@@ -195,18 +195,18 @@ namespace blinear
                 }
                 else
                 {
-                    return ((int)start.y + 56 + (1 - (int)zdir) / 2);
+                    return ((int)start.y * 2 + 56 + (1 - (int)zdir) / 2);
                 }
             }
             else
             {
                 if (zdir == NOTMOVE)
                 {
-                    return ((int)start.z + 64 + (1 - (int)ydir) / 2);
+                    return ((int)start.z * 2 + 64 + (1 - (int)ydir) / 2);
                 }
                 else
                 {
-                    return ((1 - (int)xdir) + (1 - (int)ydir) / 2);
+                    return ((1 - (int)xdir) + 72 + (1 - (int)ydir) / 2);
                 }
             }
         }

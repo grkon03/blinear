@@ -13,8 +13,6 @@ int main()
     Coordinate x, y;
     int _x, _y;
 
-    std::cout << bl.GetParam(WHITE, 10) << std::endl;
-
     while (game.JudgeWinner() == NOBALL || game.GetSpendTurn() == 64)
     {
         cm.DisplayCube(&game);
