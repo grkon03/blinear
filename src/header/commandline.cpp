@@ -62,7 +62,7 @@ namespace blinear
         return blet::NoErr;
     }
 
-    BLError CommandLine::PlayGameParser(Blinear bl, Cube *cube, std::string command, std::string *result)
+    BLError CommandLine::PlayGameParser(Cube *cube, std::string command, std::string *result)
     {
         *result = "";
 
@@ -197,7 +197,7 @@ namespace blinear
         {
             for (j = 0; j < number; j++)
             {
-                if (IsError(bestmove = bl.GetBestMove(j)))
+                if (IsError(bestmove = computer.GetBestMove(j)))
                 {
                     *result = "Note : not analyzed after this move";
                 }
