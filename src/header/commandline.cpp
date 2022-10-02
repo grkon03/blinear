@@ -56,7 +56,16 @@ namespace blinear
                 std::cout << std::endl;
             }
         }
+        if (setting.displayEvaluation)
+        {
+            std::cout << "evaluation : " << computer->GetEvaluation() << std::endl;
+        }
+        if (setting.displayBestMoves)
+        {
+            std::cout << "BestMove : " << PositionToString(computer->GetBestMove(0)) << std::endl;
+        }
         std::cout << ((cube->GetTurn() == WHITE) ? "White" : "Black") << " turn" << std::endl;
+
         std::cout << std::endl;
 
         return blet::NoErr;
@@ -77,14 +86,15 @@ namespace blinear
         bool mode_get_bestMoves = false;
 
         i = 0;
-        phaze = 0;
+        phaze = 1;
         for (char c : command)
         {
             i++;
-            if (!(c == ' ' || i == command.length()))
+            if (c != ' ')
             {
                 com += c;
-                continue;
+                if (i != command.length())
+                    continue;
             }
 
             switch (phaze)
@@ -143,13 +153,17 @@ namespace blinear
                             if (IsError(record[i]))
                                 break;
 
-                            *result += (i + 1) + ". " + PositionToString(record[i]);
+                            *result += std::to_string(i + 1) + ". " + PositionToString(record[i]);
 
                             if (i % 2 == 0)
                                 *result += " ";
                             else
                                 *result += "\n";
                         }
+                    }
+                    else
+                    {
+                        return blet::GenCommandParseError("invalid argument : " + com);
                     }
                 }
                 else
@@ -179,6 +193,7 @@ namespace blinear
                 return blet::GenCommandParseError("too many arguments");
             }
 
+            com = "";
             phaze++;
         }
 
@@ -199,11 +214,62 @@ namespace blinear
             {
                 if (IsError(bestmove = computer->GetBestMove(j)))
                 {
-                    *result = "Note : not analyzed after this move";
+                    *result += "\nNote : not analyzed after this move";
+                    break;
                 }
+
+                *result += std::to_string(cube->GetSpendTurn() + j + 1) + ". " + PositionToString(bestmove);
+
+                if (j % 2 == 0)
+                    *result += " ";
+                else
+                    *result += "\n";
             }
         }
 
         return blet::NoErr;
+    }
+
+    void CommandLine::PlayGamePvP()
+    {
+        Cube c;
+        std::string com, res;
+        BLError err;
+        int spent = -1;
+
+        while (c.JudgeWinner() == NOBALL)
+        {
+            if (spent != c.GetSpendTurn())
+            {
+                spent = c.GetSpendTurn();
+                computer->evaluate(c);
+                DisplayCube(&c);
+            }
+            std::cout << "User > ";
+            std::getline(std::cin, com);
+            err = PlayGameParser(&c, com, &res);
+            if (err != blet::NoErr)
+                std::cout << err.ErrorMessage() << std::endl;
+            if (res == "#exit")
+                break;
+            else if (res != "")
+                std::cout << res << std::endl
+                          << std::endl;
+        }
+
+        switch (c.JudgeWinner())
+        {
+        case WHITE:
+            std::cout << "White wins" << std::endl
+                      << std::endl;
+            break;
+        case BLACK:
+            std::cout << "Black wins" << std::endl
+                      << std::endl;
+            break;
+        case NOBALL:
+            std::cout << "Drow" << std::endl
+                      << std::endl;
+        }
     }
 }

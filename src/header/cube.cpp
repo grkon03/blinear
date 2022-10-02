@@ -64,9 +64,9 @@ namespace blinear
     {
         if (str.length() != 2)
             return POSITIONERR;
-        if (str[0] < '0' || '3' < str[0] || str[1] < '0' || '3' < str[1])
+        if (str[0] < '1' || '4' < str[0] || str[1] < '1' || '4' < str[1])
             return POSITIONERR;
-        return Position{Coordinate(str[0] - '0'), Coordinate(str[1] - '0')};
+        return Position{Coordinate(str[0] - '1'), Coordinate(str[1] - '1')};
     }
 
     Square Line::operator[](int n)

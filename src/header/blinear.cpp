@@ -140,6 +140,8 @@ namespace blinear
         return -1;
     }
 
+    double Blinear::GetEvaluation() { return evaluation; }
+
     double Blinear::evaluateTemporary(Cube cube)
     {
         double evl = 0;

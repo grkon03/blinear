@@ -4,6 +4,8 @@ evaluator.h
 Definitions of the evaluator.
 */
 
+#pragma once
+
 #include "cube.h"
 
 namespace blinear
@@ -66,6 +68,7 @@ namespace blinear
         double GetParam(Ball, int);
 
         Position GetBestMove(int);
+        double GetEvaluation();
 
         double evaluateTemporary(Cube);
         double alphabeta(Cube, double, double, int, int);

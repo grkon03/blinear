@@ -4,6 +4,30 @@ namespace blinear
 {
     bool BLError::operator==(const BLError &b) { return (status == b.status); }
     bool BLError::operator!=(const BLError &b) { return (status != b.status); }
+    std::string BLError::ErrorMessage()
+    {
+        std::string res;
+        if (*this == blet::SetSquareErr)
+            res = "Set Square Error";
+        else if (*this == blet::MoveErr)
+            res = "Move Error";
+        else if (*this == blet::SetLineErr)
+            res = "Set Line Error";
+        else if (*this == blet::LoadParamErr)
+            res = "Load Parameter Error";
+        else if (*this == blet::SaveParamErr)
+            res = "Save Parameter Error";
+        else if (*this == blet::NewParamFileErr)
+            res = "New Parameter File Error";
+        else if (*this == blet::CommandParseErr)
+            res = "Command Parse Error";
+        else
+            res = "Unexpected Error";
+
+        res += " : " + message;
+
+        return res;
+    }
 
     namespace blet
     {
